@@ -1,0 +1,33 @@
+# TODO
+
+- [ ] Semantic Token (full)
+    - [x] keyword|number|string|regex|primitive
+    - [x] parameter
+    - [x] function
+    - [x] variable
+    - [x] class
+    - [x] method
+    - [ ] Add test
+- [ ] Publish tasks (minimal)
+    - [x] Investigate how to publish as VSCode extension
+    - [x] Cleanup frontend code
+    - [x] Translate all japanese text into English
+    - [x] Cleanup README
+        - [x] Add comment about dangling-else and isSlash...
+    - [x] Cleanup assets dir
+    - [ ] Check License
+    - [ ] Cleanup commits
+    - [ ] Delete unused pest parser
+    - [ ] Publish as VSCode extension
+    - [ ] Publish repository
+- [ ] Adjusting output log levels
+- [ ] Setup CI/CD
+- [ ] Reducing VSIX file size
+- [ ] Goto definition
+- [ ] Find reference
+- [ ] Hover
+- [ ] Diagnostic
+- [ ] Rename
+- [ ] Signature Help
+- [ ] Semantic Token (full_delta)
+- [ ] Semantic Token (range)

@@ -1,6 +1,19 @@
 [package]
-name = "painless_lsp"
+name = "painless-lsp"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+antlr-rust = "0.3.0-beta"
+better_any = "0.2.0"
+env_logger = "0.11.6"
+log = "0.4.22"
+pest = "2.7.15"
+pest_derive = "2.7.15"
+serde = { version = "1.0.217", features = ["derive"] }
+serde_json = "1.0.135"
+tokio = { version = "1.43.0", features = ["full"] }
+tower-lsp = { version = "0.20.0" }
+
+[dev-dependencies]
+pretty_assertions = "1.4.1"

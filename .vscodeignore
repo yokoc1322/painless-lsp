@@ -1,0 +1,9 @@
+**
+!icon.png
+!language-configuration.json
+!LICENSE
+!dist/extension.js
+!package-lock.json
+!package.json
+!target/release/painless-lsp
+!README.md

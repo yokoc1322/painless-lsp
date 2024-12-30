@@ -1,0 +1,9 @@
+// comment 1
+double originalPrice = 100.0; // original price
+double finalPrice;
+
+// comment 2
+finalPrice = originalPrice * 0.8;
+
+// comment 3
+return finalPrice;

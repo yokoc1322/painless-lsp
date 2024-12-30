@@ -1,0 +1,82 @@
+// ---- definition/declaration ---
+// 関数の定義
+double calculateDiscount(double price, double discountRate) {
+    return price - (price * discountRate);
+}
+
+// メイン処理
+double originalPrice = 100.0; // 元の価格
+double discountRate; // 割引率
+double finalPrice;
+double minusValue = -100;
+
+// suffix
+double doubleSuffix = 0D;
+long longSuffix = 1234L;
+float floatSuffix = -90f;
+int octal = -022;
+int hex = 0xF2A;
+
+// float
+float f1 = 0.0;
+float f2 = 1E6;
+float f3 = 0.977777;
+float f4 = -126.34;
+float f5 = 89.9F;
+
+// String
+String s1 = "Hello, World!";
+String s2 = 'Hello, World!';
+
+// Array definition
+ArrayList l = new ArrayList();
+List l = new ArrayList();
+int i = l1.get(0) + l0.get(1);
+
+// dynamic type
+def dp = 1;
+def dr = new ArrayList();
+
+// array operator
+ia1 = new int[2];
+
+// Array operation
+l0.add(1);
+l1.add(2);
+
+// hashmap
+int i = (int)5L;
+Map m = new HashMap();
+HashMap hm = (HashMap)m;
+
+
+// ------- Operation -----
+dr = dp;
+d.ensureCapacity(10);
+
+int[] ia1;
+ia1[0] = 1;
+int[] ib1 = ia1;
+int[][] ic2 = new int[2][5];
+ic2[1][3] = 2;
+ic2[0] = ia1;
+
+// lambda
+list.removeIf(item -> item == 2);
+list.removeIf((int item) -> item == 2);
+list.removeIf((int item) -> { item == 2 });
+list.sort((x, y) -> x - y);
+list.sort(Integer::compare);
+
+// 条件分岐
+if (originalPrice > 50.0) {
+    discountRate = 0.2; // 20%の割引
+} else {
+    discountRate = 0.1; // 10%の割引
+}
+
+// 割引後の価格を計算
+finalPrice = calculateDiscount(originalPrice, discountRate);
+
+// 結果を出力
+return finalPrice;

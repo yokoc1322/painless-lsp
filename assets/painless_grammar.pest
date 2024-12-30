@@ -1,0 +1,50 @@
+// WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+WHITESPACE = _{ " " | "\t" }
+
+program   =  { SOI ~ "\n"* ~ (statement ~ "\n"+)* ~ statement? ~ EOI }
+statement = _{ expr }
+
+expr = {
+    function
+  | declare_with_assign_expr
+  | declare_expr
+  | monadic_expr
+  | dyadic_expr
+  | string
+  | terms
+}
+
+monadic_expr             = { verb ~ expr }
+dyadic_expr              = { (monadic_expr | terms) ~ verb ~ expr }
+declare_expr             = { type ~ identifier }
+declare_with_assign_expr = { type ~ identifier ~ "=" ~ expr }
+
+function      = { return_type ~ function_name ~ "(" ~ parameters? ~ ")" ~ function_body }
+function_name = { identifier }
+return_type   = { type | "void" }
+parameters    = { parameter ~ ("," ~ parameter)* }
+parameter     = { "def" ~ identifier }
+function_body = { "{" ~ statement* ~ "}" }
+
+verb = {
+    "+"
+  | "-"
+  | "*"
+  | "/"
+  | "%"
+  | ">"
+  | "<"
+}
+
+type = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }
+
+terms =  { term+ }
+term  = _{ float | integer | identifier | "(" ~ expr ~ ")" }
+
+integer      = @{ "_"? ~ ASCII_DIGIT+ }
+float        = @{ "_"? ~ ASCII_DIGIT+ ~ "." ~ ASCII_DIGIT* }
+identifier   = @{ ASCII_ALPHA ~ (ASCII_ALPHANUMERIC | "_")* }
+string       = _{ "\"" ~ string_value ~ "\"" }
+string_value = @{ ("\"\"" | (!"\"" ~ ANY))* }
+
+nl = _{ ("\n" | "\r")* }
