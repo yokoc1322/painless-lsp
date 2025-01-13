@@ -15,9 +15,9 @@
     - [x] Cleanup README
         - [x] Add comment about dangling-else and isSlash...
     - [x] Cleanup assets dir
-    - [ ] Check License
-    - [ ] Cleanup commits
-    - [ ] Delete unused pest parser
+    - [x] Check License
+    - [x] Cleanup commits
+    - [x] Delete unused pest parser
     - [ ] Publish as VSCode extension
     - [ ] Publish repository
 - [ ] Adjusting output log levels

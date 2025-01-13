@@ -2,8 +2,6 @@ mod antlr;
 mod antlr_semantic_tree;
 mod antlr_token_mapping;
 mod lsp_token;
-mod pest_semantic_tree;
-mod pest_token_mapping;
 mod semantic_tree_type;
 mod server;
 mod utils;
