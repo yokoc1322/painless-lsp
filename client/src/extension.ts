@@ -37,7 +37,7 @@ export async function activate(context: ExtensionContext) {
 
   const traceOutputChannel = window.createOutputChannel("Painless Language Server trace");
   // const command = process.env.SERVER_PATH || "painless-lsp";
-  const command = process.env.SERVER_PATH || "target/release/painless-lsp";
+  const command = process.env.SERVER_PATH || Uri.joinPath(context.extensionUri, "target", "release", "painless-lsp").fsPath;
   const run: Executable = {
     command,
     options: {
