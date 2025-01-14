@@ -4,7 +4,7 @@
     "publisher": "yokoc1322",
     "icon": "icon.png",
     "license": "AGPL-3.0-only",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "repository": {
         "url": "https://github.com/yokoc1322/painless-lsp",
         "type": "git"

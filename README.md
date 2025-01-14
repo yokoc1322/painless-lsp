@@ -2,6 +2,12 @@
 
 Language server for Elasticsearch's Painless scripting language.
 
+This recognizes files with the .painless extension as Painless script files.
+
+## Supported Architectures
+
+- x86_64-unknown-linux-gnu
+
 ## Features
 
 - Syntax highlight
