@@ -19,7 +19,7 @@ build_dev: ## Build server and client for development
 .PHONY: build_release
 build_release: ## Build server and client for release
 	@echo "Building server and client for release"
-	cargo build
+	cargo build --release
 	pnpm compile
 	vsce package -o dist/
 
