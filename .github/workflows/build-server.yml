@@ -1,0 +1,35 @@
+name: Build server
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        required: true
+        description: 'ex. 0.0.1'
+  workflow_call:
+    inputs:
+      version:
+        type: string
+        required: true
+        description: 'ex. 0.0.1'
+    outputs:
+      artifact-name:
+        value: server-artifact
+jobs:
+  build-server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Set up Rust stable
+        uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build rust
+        run: cargo build --release
+      - name: Upload artifact
+        id: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: server-artifact
+          path: target/release/painless-lsp

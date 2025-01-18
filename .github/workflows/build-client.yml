@@ -1,0 +1,44 @@
+name: Build client
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        required: true
+        description: 'ex. 0.0.1'
+  workflow_call:
+    inputs:
+      version:
+        type: string
+        required: true
+        description: 'ex. 0.0.1'
+    outputs:
+      artifact-name:
+        value: client-artifact
+jobs:
+  build-client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 9.15.3
+          run_install: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build client
+        run: pnpm compile
+      - name: Upload artifact
+        id: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: client-artifact
+          path: dist/extension.js

@@ -1,0 +1,37 @@
+name: release
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+jobs:
+  build-vsix:
+    runs-on: ubuntu-latest
+    outputs:
+      artifact-name: ${{ steps.build-vsix.outputs.artifact-name }}
+    steps:
+    - name: Set version without 'v'
+      id: set_version
+      run: echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+    - name: Build vsix
+      id: build-vsix
+      uses: ./.github/workflows/build-vsix.yml
+      with:
+        version: ${{ steps.set_version.outputs.version }}
+  crate-release:
+    runs-on: ubuntu-latest
+    needs: [build-vsix]
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build-vsix.outputs.artifact-name }}
+      - name: Create release
+        run: |
+          gh release create ${{ github.ref_name }} *.vsix -d
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

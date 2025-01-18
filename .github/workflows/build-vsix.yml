@@ -1,0 +1,70 @@
+name: build vsix
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        required: true
+        description: 'ex. 0.0.1'
+  workflow_call:
+    inputs:
+      version:
+        type: string
+        required: true
+        description: 'ex. 0.0.1'
+    outputs:
+      artifact-name:
+        value: vsix-artifact
+jobs:
+  build-server:
+    uses: ./.github/workflows/build-server.yml
+    with:
+      version: ${{ github.event.inputs.version }}
+
+  build-client:
+    uses: ./.github/workflows/build-client.yml
+    with:
+      version: ${{ github.event.inputs.version }}
+
+  build-vsix:
+    runs-on: ubuntu-latest
+    needs: [build-server, build-client]
+    env:
+      VSCE_VERSION: 3.2.1
+      NODE_VERSION: 22
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Download server artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build-server.outputs.artifact-name }}
+          path: target/release/
+      - name: Download client artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build-client.outputs.artifact-name }}
+          path: dist/
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache vsce
+        id: cache-vsce
+        uses: actions/cache@v4
+        with:
+          path: |
+            /usr/local/bin/vsce
+            /usr/local/lib/node_modules/@vscode
+          key: vsce-${{ runner.os }}-${{ env.NODE_VERSION }}-${{ env.VSCE_VERSION }}
+      - name: Install vsce
+        if: steps.cache-vsce.outputs.cache-hit != 'true'
+        run: npm install -g @vscode/vsce@
+      - name: Package vsix
+        run: vsce package -o dist/
+      - name: Archive vsix
+        uses: actions/upload-artifact@v4
+        with:
+          name: vsix-artifact
+          path: dist/*.vsix

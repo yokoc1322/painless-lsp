@@ -18,10 +18,11 @@
     - [x] Check License
     - [x] Cleanup commits
     - [x] Delete unused pest parser
-    - [ ] Publish as VSCode extension
-    - [ ] Publish repository
-- [ ] Adjusting output log levels
+    - [x] Publish as VSCode extension
+    - [x] Publish repository
 - [ ] Setup CI/CD
+- [ ] Multi platform build
+- [ ] Adjusting output log levels
 - [ ] Reducing VSIX file size
 - [ ] Goto definition
 - [ ] Find reference
