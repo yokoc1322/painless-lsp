@@ -13,36 +13,26 @@ jobs:
         id: extract-version-name
         run: |
           echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
-  validate-input:
-    runs-on: ubuntu-latest
+  build-vsix:
+    uses: ./.github/workflows/build-vsix.yml
     needs: [extract-version-name]
+    with:
+      version: ${{ needs.extract-version-name.outputs.version }}
+  crate-release:
+    runs-on: ubuntu-latest
+    needs: [extract-version-name, build-vsix]
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - uses: ./.github/actions/validation-version-format
+      - name: Download artifact
+        uses: actions/download-artifact@v4
         with:
-          version: ${{ needs.extract-version-name.outputs.version }}
-  # build-vsix:
-  #   uses: ./.github/workflows/build-vsix.yml
-  #   needs: [extract-version-name]
-  #   with:
-  #     version: ${{ needs.extract-version-name.outputs.version }}
-  # crate-release:
-  #   runs-on: ubuntu-latest
-  #   needs: [extract-version-name, build-vsix]
-  #   permissions:
-  #     contents: write
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         fetch-depth: 1
-  #     - name: Download artifact
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: ${{ needs.build-vsix.outputs.artifact-name }}
-  #     - name: Create release
-  #       run: |
-  #         gh release create ${{ needs.extract-version-name.outputs.version }} *.vsix -d
-  #       env:
-  #         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          name: ${{ needs.build-vsix.outputs.artifact-name }}
+      - name: Create release
+        run: |
+          gh release create ${{ needs.extract-version-name.outputs.version }} *.vsix -d
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
