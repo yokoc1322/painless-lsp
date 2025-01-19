@@ -16,13 +16,8 @@ on:
       artifact-name:
         value: client-artifact
 jobs:
-  validate-input:
-    uses: ./.github/workflows/validate-version-format.yml
-    with:
-      version: ${{ inputs.version }}
   build-client:
     runs-on: ubuntu-latest
-    needs: [validate-input]
     steps:
       - uses: actions/checkout@v4
         with:
