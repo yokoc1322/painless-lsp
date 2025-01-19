@@ -1,0 +1,18 @@
+name: 'Validate Version Format'
+description: 'Validates that the input version string matches the *.*.* format'
+inputs:
+  version:
+    description: 'Version string to validate'
+    required: true
+    type: string
+runs:
+  using: composite
+  steps:
+    - name: Validate version format
+      id: validate
+      run: |
+        if [[ ! "${{ inputs.version }}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "Invalid version format: ${{ inputs.version }}"
+          exit 1
+        fi
+      shell: bash
