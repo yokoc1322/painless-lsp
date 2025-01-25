@@ -49,7 +49,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - uses: ./.github/actions/update-cargo-toml-version
         with:
-          version: ${{ github.event.inputs.version }}
+          version: ${{ inputs.version }}
           os: ${{ matrix.os }}
       - name: Add target
         run: |
