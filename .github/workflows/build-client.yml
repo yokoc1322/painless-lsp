@@ -32,6 +32,10 @@ jobs:
         with:
           node-version: '22'
           cache: 'pnpm'
+      - name: Update version in package.json
+        run: |
+          jq '.version = "${{ inputs.version }}"' package.json > tmp.json && mv -f tmp.json package.json
+          jq '.version = "${{ inputs.version }}"' client/package.json > tmp.json && mv -f tmp.json client/package.json
       - name: Install dependencies
         run: pnpm install
       - name: Build client

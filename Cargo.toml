@@ -1,6 +1,6 @@
 [package]
 name = "painless-lsp"
-version = "0.0.4"
+version = "999.999.999"
 edition = "2021"
 
 [dependencies]

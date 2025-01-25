@@ -2,7 +2,7 @@
 	"name": "painless-lsp",
 	"description": "",
 	"license": "",
-	"version": "0.0.4",
+	"version": "999.999.999",
 	"engines": {
 		"vscode": "^1.96.0"
 	},

@@ -25,6 +25,9 @@ jobs:
       - name: Set up Rust stable
         uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
+      - name: Update version in Cargo.toml
+        run: |
+          sed -i 's/^version = ".*"/version = "${{ inputs.version }}"/' Cargo.toml
       - name: Build rust
         run: cargo build --release
       - name: Upload artifact
