@@ -40,11 +40,23 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Download server artifact
+      # Download server apps
+      - name: Download server artifact for windows x86_64
         uses: actions/download-artifact@v4
         with:
-          name: ${{ needs.build-server.outputs.artifact-name }}
-          path: target/release/
+          name: ${{ needs.build-server.outputs.artifact-windows-x86-64 }}
+          path: target/windows-x86-64/release/
+      - name: Download server artifact for linux x86_64
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build-server.outputs.artifact-linux-x86-64 }}
+          path: target/linux-x86-64/release/
+      - name: Download server artifact for macos arm64
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build-server.outputs.artifact-macos-arm64 }}
+          path: target/macos-arm64/release/
+      #
       - name: Download client artifact
         uses: actions/download-artifact@v4
         with:
@@ -65,6 +77,8 @@ jobs:
       - name: Install vsce
         if: steps.cache-vsce.outputs.cache-hit != 'true'
         run: npm install -g @vscode/vsce@
+      - name: Add execution permission
+        run: chmod -R +x target/
       - name: Package vsix
         run: vsce package -o dist/
       - name: Archive vsix

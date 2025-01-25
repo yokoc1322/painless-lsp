@@ -6,7 +6,9 @@ This recognizes files with the .painless extension as Painless script files.
 
 ## Supported Architectures
 
+- x86_64-pc-windows-msvc
 - x86_64-unknown-linux-gnu
+- aarch64-apple-darwin
 
 ## Features
 

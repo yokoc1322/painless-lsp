@@ -5,5 +5,6 @@
 !dist/extension.js
 !package-lock.json
 !package.json
-!target/release/painless-lsp
+!target/**/release/painless-lsp
+!target/**/release/painless-lsp.exe
 !README.md

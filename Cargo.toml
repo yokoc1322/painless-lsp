@@ -1,6 +1,6 @@
 [package]
 name = "painless-lsp"
-version = "999.999.999"
+version = "999.999.999" # will be replaced by the build script
 edition = "2021"
 
 [dependencies]

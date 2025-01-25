@@ -1,0 +1,32 @@
+name: 'Update Cargo.toml Version'
+description: 'Update the version in Cargo.toml'
+inputs:
+  version:
+    description: 'Version to set in Cargo.toml (e.g., 0.0.1)'
+    required: true
+  os:
+    description: 'Operating system (windows, linux, mac)'
+    required: true
+    type: choice
+    options:
+      - windows
+      - linux
+      - macos
+runs:
+  using: 'composite'
+  steps:
+    - name: Update version in Cargo.toml (Windows)
+      if: ${{ inputs.os == 'windows' }}
+      shell: pwsh
+      run: |
+        (Get-Content Cargo.toml) -replace '^version = ".*"', 'version = "${{ inputs.version }}"' | Set-Content Cargo.toml
+    - name: Update version in Cargo.toml (Linux)
+      if: ${{ inputs.os == 'linux' }}
+      shell: bash
+      run: |
+        sed -i 's/^version = ".*"/version = "${{ inputs.version }}"/' Cargo.toml
+    - name: Update version in Cargo.toml (Mac)
+      if: ${{ inputs.os == 'mac' }}
+      shell: bash
+      run: |
+        sed -i '' 's/^version = ".*"/version = "${{ inputs.version }}"/' Cargo.toml
