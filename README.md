@@ -55,9 +55,11 @@ Due to the constraints of the library used to utilize ANTLR definitions in Rust,
 
 ### How to Publish
 
-1. `make build_release`
-2. (For local debugging, run `code --install-extension dist/painless-lsp-x.y.z.vsix`)
-3. Upload `dist/painless-lsp-x.y.z.vsix` file manually
+1. Add `v*.*.*` tag and push
+1. Wait until [release workflow](https://github.com/yokoc1322/painless-lsp/actions/workflows/release.yml) finishes
+1. Download artifact attached to a new release that created by the workflow
+1. (For local debugging, run `code --install-extension dist/painless-lsp-x.y.z.vsix`)
+1. Upload `dist/painless-lsp-x.y.z.vsix` file manually
     - [WEB UI](https://marketplace.visualstudio.com/) or command
 
 ### References

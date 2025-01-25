@@ -20,8 +20,9 @@
     - [x] Delete unused pest parser
     - [x] Publish as VSCode extension
     - [x] Publish repository
-- [ ] Setup CI/CD
-- [ ] Multi platform build
+- [x] Multi platform build
+- [ ] Setup CI
+- [ ] Automate publishing for marketplace
 - [ ] Adjusting output log levels
 - [ ] Reducing VSIX file size
 - [ ] Goto definition
