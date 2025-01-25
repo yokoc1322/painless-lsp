@@ -1,4 +1,4 @@
-name: build vsix
+name: Build vsix
 on:
   workflow_dispatch:
     inputs:
