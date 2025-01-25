@@ -79,6 +79,10 @@ jobs:
         run: npm install -g @vscode/vsce@
       - name: Add execution permission
         run: chmod -R +x target/
+      - name: Update version in package.json
+        uses: ./.github/actions/update-package-json-version
+        with:
+          version: ${{ inputs.version }}
       - name: Package vsix
         run: vsce package -o dist/
       - name: Archive vsix

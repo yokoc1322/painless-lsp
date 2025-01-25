@@ -1,0 +1,14 @@
+name: 'Update package.json Version'
+description: 'Update the version in package.json'
+inputs:
+  version:
+    description: 'Version to set in package.json (e.g., 0.0.1)'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Update version in package.json
+      shell: bash
+      run: |
+        jq '.version = "${{ inputs.version }}"' package.json > tmp.json && mv -f tmp.json package.json
+        jq '.version = "${{ inputs.version }}"' client/package.json > tmp.json && mv -f tmp.json client/package.json
